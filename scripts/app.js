@@ -9,11 +9,10 @@ const cache = JSON.parse(localStorage.getItem("cache")) || {};
 const fetchWeatherData = async (query) => {
   weatherContainer.classList.add("loading");
   const time = Math.round(Date.now() / 1000);
-  if (query in cache && cache[query].time > time - 60) {
+  invalidateCache();
+  if (query in cache) {
     console.log(
-      `cache hit - no need to fetch data for ${query} previously fetched ${
-        time - cache[query].time
-      } seconds ago`
+      `cache hit - no need to fetch data for ${query} previously fetched less than 60 seconds ago`
     );
     return cache[query].data;
   }
@@ -22,6 +21,7 @@ const fetchWeatherData = async (query) => {
   const res = await fetch(endpoint, { mode: "cors" });
   if (res.status !== 200) {
     alert("Cannot fetch data check for any typos");
+    weatherContainer.classList.remove("loading");
     throw new Error("cannot fetch data");
   }
   const data = await res.json();
@@ -29,6 +29,16 @@ const fetchWeatherData = async (query) => {
   localStorage.setItem("cache", JSON.stringify(cache));
   console.log(cache);
   return data;
+};
+
+const invalidateCache = () => {
+  const time = Math.round(Date.now() / 1000);
+  for (const [key, value] of Object.entries(cache)) {
+    if (time - value.time > 60) {
+      delete cache[key];
+    }
+  }
+  localStorage.setItem("cache", JSON.stringify(cache));
 };
 
 const updateUI = (data) => {
