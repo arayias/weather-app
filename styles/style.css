@@ -1,0 +1,64 @@
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Roboto", sans-serif;
+}
+
+.wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  flex-direction: column;
+  background-color: aliceblue;
+}
+
+.wrapper h1 {
+  font-size: 3rem;
+  margin-bottom: 20px;
+  padding: 0.5em;
+  border-radius: 0.5em;
+  color: white;
+  background: linear-gradient(to right, #f2994a, #f2c94c);
+}
+
+#search {
+  width: 250px;
+  height: 40px;
+  border-radius: 5px;
+  border: none;
+  outline: blanchedalmond 2px solid;
+  padding-left: 10px;
+  font-size: 1rem;
+  margin-bottom: 20px;
+}
+
+button {
+  padding: 0.7em;
+  border-radius: 5px;
+  border: none;
+  outline: blanchedalmond 2px solid;
+  padding-left: 10px;
+  font-size: 1rem;
+  margin-bottom: 20px;
+  background: linear-gradient(to right, #f2994a, #f2c94c);
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.weather {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 25%;
+  aspect-ratio: 1/1;
+  border-radius: 50%;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  font-size: 1.5em;
+}
